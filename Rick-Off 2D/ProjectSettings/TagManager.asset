@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bullet
+  - Enemy
+  - Right Turn Trigger
+  - Left Turn Trigger
+  - Front Turn Trigger
+  - Back Turn Trigger
+  - End Path Trigger
   layers:
   - Default
   - TransparentFX

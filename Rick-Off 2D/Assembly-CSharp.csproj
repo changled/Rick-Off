@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BulletScript.cs" />
+     <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\SDMortyController.cs" />
      <Compile Include="Assets\Scripts\TowerController.cs" />
      <None Include="Assets\Sprites\Tower Defense (top-down)\Misc\License.txt" />
