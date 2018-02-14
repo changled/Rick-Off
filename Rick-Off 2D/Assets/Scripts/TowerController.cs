@@ -5,21 +5,17 @@ using UnityEngine.UI;
 
 public class TowerController : MonoBehaviour {
 	public float speed;
-	private Rigidbody2D tankHeadRB;
-	public GameObject tankHead;
-	public GameObject bulletPrefab;
-	public Transform bulletSpawn1;
-	public Transform bulletSpawn2;
+	public GameObject tankHead, bulletPrefab;
+	public Transform bulletSpawn1, bulletSpawn2;
 	public float fireRate = 5;
 	public LayerMask whatToHit;
+
 	private float timeToFire = 0;
 	private Transform firePoint;
-	private Vector2 firePointPosition;
-	private Vector2 shootPoint1;
-	private Vector2 shootPoint2;
+	private Rigidbody2D tankHeadRB;
+	private Vector2 firePointPosition, shootPoint1, shootPoint2;
 
 	void Awake() {
-		
 		firePoint = transform.Find ("FirePoint");
 
 		if (firePoint == null) {
@@ -60,7 +56,6 @@ public class TowerController : MonoBehaviour {
 		bullet1.GetComponent<Rigidbody2D> ().velocity = (leftGunDir * 10);
 		bullet2.GetComponent<Rigidbody2D> ().velocity = (rightGunDir * 10);
 
-//		Debug.Log ("FIRE!");
 		Destroy (bullet1, 2.0f); //destroy bullet ImageEffectAfterScale 2 seconds
 		Destroy (bullet2, 2.0f); //destroy bullet ImageEffectAfterScale 2 seconds
 	}

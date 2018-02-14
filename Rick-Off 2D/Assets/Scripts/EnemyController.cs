@@ -4,36 +4,46 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour {
-	public float speed;
-	private Rigidbody2D rb2d;
-	public Text healthText;
-	public float health;
+	public float speed, enemyHealth;
 	public Animator anim;
-	Vector2 direction;
+	public bool isDead;
+	public AudioSource ohmanAudio, ohmygodAudio, mymanAudio;
+
+	private Rigidbody2D rb2d;
+	private Vector2 direction;
 	private string lastTriggerSet;
+	private GameObject manager;
+	private EnemyManager managerScript;
 
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
+		manager = GameObject.Find ("Morty Spawn Location");
+		managerScript = manager.GetComponent<EnemyManager>();
 		speed = 10;
-		health = 100;
+		enemyHealth = 100;
 		direction = Vector2.up;
+		isDead = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		transform.Translate (direction * Time.deltaTime);
-		healthText.text = "Health: " + health;
 
-		if(health <= 0)
-			gameObject.SetActive (false);
-		
+		if (enemyHealth <= 0) { //success killing enemy!
+			managerScript.killCount += 1;
+			ohmygodAudio.Play ();
+
+			Debug.Log("you have killed enemy: SUCCESS");
+			DestroySelf();
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.CompareTag ("Bullet")) {
-			health -= 10;
+			enemyHealth -= 10;
+			ohmanAudio.Play ();
 		} else if (other.gameObject.CompareTag ("Right Turn Trigger")) {
 			anim.ResetTrigger (lastTriggerSet);
 			anim.SetTrigger ("Turn Right");
@@ -54,9 +64,17 @@ public class EnemyController : MonoBehaviour {
 			anim.SetTrigger ("Face Backward");
 			direction = Vector2.up;
 			lastTriggerSet = "Face Backward";
-		} else if (other.gameObject.CompareTag ("End Path Trigger")) {
+		} else if (other.gameObject.CompareTag ("End Path Trigger")) { //failure killing enemy!
+			mymanAudio.Play();
 			anim.SetTrigger ("End Path");
-			Destroy (gameObject);
+			managerScript.playerHealth -= 1;
+			Debug.Log ("enemy has reached goal: FAILURE");
+			DestroySelf();
 		}
+	}
+
+	void DestroySelf() {
+		managerScript.deadEnemy = gameObject;
+		isDead = true;
 	}
 }
