@@ -465,11 +465,7 @@ Prefab:
       propertyPath: mymanAudio
       value: 
       objectReference: {fileID: 1463102162}
-    m_RemovedComponents:
-    - {fileID: 82928994960412776, guid: 819572b4f94214da38e821630915b057, type: 2}
-    - {fileID: 82494634981674512, guid: 819572b4f94214da38e821630915b057, type: 2}
-    - {fileID: 82741587510354858, guid: 819572b4f94214da38e821630915b057, type: 2}
-    - {fileID: 82736504595470746, guid: 819572b4f94214da38e821630915b057, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 819572b4f94214da38e821630915b057, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &89615839
@@ -5057,7 +5053,7 @@ Animator:
   m_GameObject: {fileID: 1033940174}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d5591518b475045ebb7da7917c42fc30, type: 2}
+  m_Controller: {fileID: 9100000, guid: 279625ef33fca4cd7933a10cef8d89b0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

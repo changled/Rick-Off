@@ -64,11 +64,6 @@ public class EnemyManager : MonoBehaviour {
 			return;
 		}
 
-//		if (spawnedCount == 1) { //so you don't accidentally destroy first one!
-//			Vector2 temp = new Vector2(6.0f, 6.0f);
-//			instance.transform.Translate(temp);
-//		}
-
 		GameObject newEnemy = enemy;
 
 		if (enemy == null) {

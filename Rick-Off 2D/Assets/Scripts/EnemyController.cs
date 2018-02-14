@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour {
 	private string lastTriggerSet;
 	private GameObject manager;
 	private EnemyManager managerScript;
+//	GameObject manager = gameObject.transform.parent.gameObject;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +22,7 @@ public class EnemyController : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		manager = GameObject.Find ("Morty Spawn Location");
 		managerScript = manager.GetComponent<EnemyManager>();
-		speed = 10;
+		speed = 1;
 		enemyHealth = 100;
 		direction = Vector2.up;
 		isDead = false;
@@ -29,10 +30,11 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (direction * Time.deltaTime);
+		transform.Translate (direction * Time.deltaTime * speed);
 
 		if (enemyHealth <= 0) { //success killing enemy!
 			managerScript.killCount += 1;
+//			manager.getComponentkillCount += 1;
 			ohmygodAudio.Play ();
 
 			Debug.Log("you have killed enemy: SUCCESS");
@@ -43,7 +45,16 @@ public class EnemyController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.CompareTag ("Bullet")) {
 			enemyHealth -= 10;
-			ohmanAudio.Play ();
+
+			if(enemyHealth <= 0) { //success killing enemy!
+				managerScript.killCount += 1;
+				ohmygodAudio.Play ();
+
+				Debug.Log("you have killed enemy: SUCCESS");
+				DestroySelf();
+			}
+			else
+				ohmanAudio.Play ();
 		} else if (other.gameObject.CompareTag ("Right Turn Trigger")) {
 			anim.ResetTrigger (lastTriggerSet);
 			anim.SetTrigger ("Turn Right");
